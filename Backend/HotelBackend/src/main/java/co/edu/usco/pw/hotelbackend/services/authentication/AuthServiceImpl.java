@@ -21,7 +21,7 @@ public class AuthServiceImpl implements AuthService {
     public UserDto signupClient(SignupRequestDTO signupRequestDTO) {
         UserEntity user = new UserEntity();
 
-        // Se corrigieron los nombres de las propiedades para que coincidan con la entidad en inglés
+        // Map input DTO to UserEntity
         user.setFirstName(signupRequestDTO.getName());
         user.setLastName(signupRequestDTO.getLastname());
         user.setEmail(signupRequestDTO.getEmail());
@@ -29,7 +29,7 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(new BCryptPasswordEncoder().encode(signupRequestDTO.getPassword()));
         user.setRole(UserRole.CLIENT);
 
-        // Se guarda el nuevo cliente y se retorna el DTO correspondiente
+        // Save client and return DTO
         return userRepository.save(user).getDto();
     }
 
@@ -44,7 +44,7 @@ public class AuthServiceImpl implements AuthService {
     public UserDto signupAdmin(SignupRequestDTO signupRequestDTO) {
         UserEntity user = new UserEntity();
 
-        // Se corrigieron los nombres de las propiedades para que coincidan con la entidad en inglés
+        // Map input DTO to UserEntity
         user.setFirstName(signupRequestDTO.getName());
         user.setLastName(signupRequestDTO.getLastname());
         user.setEmail(signupRequestDTO.getEmail());
@@ -52,7 +52,26 @@ public class AuthServiceImpl implements AuthService {
         user.setPassword(new BCryptPasswordEncoder().encode(signupRequestDTO.getPassword()));
         user.setRole(UserRole.ADMIN);
 
-        // Se guarda el nuevo administrador y se retorna el DTO correspondiente
+        // Save admin and return DTO
         return userRepository.save(user).getDto();
+    }
+
+    @Operation(summary = "Create a user from Google OAuth2 login", description = "Registers or retrieves a user logging in with Google OAuth2")
+    public UserEntity createUserFromGoogle(String email, String name) {
+        // Check if the user already exists by email
+        UserEntity existingUser = userRepository.findFirstByEmail(email);
+
+        if (existingUser != null) {
+            return existingUser; // Return existing user if found
+        }
+
+        // If user does not exist, create a new one
+        UserEntity newUser = new UserEntity();
+        newUser.setEmail(email);
+        newUser.setFirstName(name); // Assume `name` contains the first name; modify as needed
+        newUser.setRole(UserRole.CLIENT); // Default role for Google users
+
+        // Save new user and return it
+        return userRepository.save(newUser);
     }
 }
