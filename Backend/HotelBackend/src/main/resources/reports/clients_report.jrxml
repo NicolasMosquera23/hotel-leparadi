@@ -1,0 +1,193 @@
+<!-- Created with Jaspersoft Studio version 7.0.1.final using JasperReports Library version 7.0.1-573496633c2b4074e32f433154b543003f7d2498  -->
+<jasperReport name="reporte_clientes" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="898d6416-44c5-4afc-814b-7981e25046b8">
+    <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+    <property name="com.jaspersoft.studio.data.defaultdataadapter" value="HotelJdbc"/>
+    <style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <leftPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+            <rightPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <leftPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+            <rightPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+        <box>
+            <pen lineWidth="0.5" lineColor="#000000"/>
+            <topPen lineWidth="0.5" lineColor="#000000"/>
+            <leftPen lineWidth="0.5" lineColor="#000000"/>
+            <bottomPen lineWidth="0.5" lineColor="#000000"/>
+            <rightPen lineWidth="0.5" lineColor="#000000"/>
+        </box>
+    </style>
+    <dataset name="clientes_dataset" uuid="2fb1f316-5ac8-4270-a514-d85a22532cf5">
+        <property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+        <property name="com.jaspersoft.studio.data.defaultdataadapter" value="HotelJdbc"/>
+        <query language="SQL"><![CDATA[SELECT * FROM users WHERE role = 'CLIENT']]></query>
+        <field name="id" class="java.lang.Long">
+            <property name="com.jaspersoft.studio.field.name" value="id"/>
+            <property name="com.jaspersoft.studio.field.label" value="id"/>
+            <property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+        </field>
+        <field name="email" class="java.lang.String">
+            <property name="com.jaspersoft.studio.field.name" value="email"/>
+            <property name="com.jaspersoft.studio.field.label" value="email"/>
+            <property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+        </field>
+        <field name="first_name" class="java.lang.String">
+            <property name="com.jaspersoft.studio.field.name" value="first_name"/>
+            <property name="com.jaspersoft.studio.field.label" value="first_name"/>
+            <property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+        </field>
+        <field name="last_name" class="java.lang.String">
+            <property name="com.jaspersoft.studio.field.name" value="last_name"/>
+            <property name="com.jaspersoft.studio.field.label" value="last_name"/>
+            <property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+        </field>
+        <field name="phone" class="java.lang.String">
+            <property name="com.jaspersoft.studio.field.name" value="phone"/>
+            <property name="com.jaspersoft.studio.field.label" value="phone"/>
+            <property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+        </field>
+    </dataset>
+    <query language="SQL"><![CDATA[SELECT * from users where role = 'CLIENT']]></query>
+    <field name="id" class="java.lang.Long">
+        <property name="com.jaspersoft.studio.field.name" value="id"/>
+        <property name="com.jaspersoft.studio.field.label" value="id"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+    </field>
+    <field name="email" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="email"/>
+        <property name="com.jaspersoft.studio.field.label" value="email"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+    </field>
+    <field name="first_name" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="first_name"/>
+        <property name="com.jaspersoft.studio.field.label" value="first_name"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+    </field>
+    <field name="last_name" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="last_name"/>
+        <property name="com.jaspersoft.studio.field.label" value="last_name"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+    </field>
+    <field name="phone" class="java.lang.String">
+        <property name="com.jaspersoft.studio.field.name" value="phone"/>
+        <property name="com.jaspersoft.studio.field.label" value="phone"/>
+        <property name="com.jaspersoft.studio.field.tree.path" value="users"/>
+    </field>
+    <group name="id">
+        <expression><![CDATA[$F{id}]]></expression>
+    </group>
+    <group name="email">
+        <expression><![CDATA[$F{email}]]></expression>
+    </group>
+    <group name="first_name">
+        <expression><![CDATA[$F{first_name}]]></expression>
+    </group>
+    <group name="last_name">
+        <expression><![CDATA[$F{last_name}]]></expression>
+    </group>
+    <group name="phone">
+        <expression><![CDATA[$F{phone}]]></expression>
+    </group>
+    <background splitType="Stretch"/>
+    <title height="79" splitType="Stretch">
+        <element kind="staticText" uuid="4a5fba10-c023-43a2-909e-856d9c54b568" x="0" y="0" width="550" height="71" fontSize="26.0" hTextAlign="Center" vTextAlign="Middle">
+            <text><![CDATA[Reporte de clientes]]></text>
+        </element>
+    </title>
+    <pageHeader height="48" splitType="Stretch">
+        <element kind="staticText" uuid="b295c251-e49e-4278-8dfe-16b2ddc5e70f" x="0" y="18" width="550" height="30" fontSize="15.0" italic="true" hTextAlign="Center">
+            <text><![CDATA[Hotel Le Paradi]]></text>
+        </element>
+    </pageHeader>
+    <columnHeader height="61" splitType="Stretch"/>
+    <detail>
+        <band height="251" splitType="Stretch">
+            <element kind="component" uuid="92c47cab-a1f0-4158-be2d-36e936fa115d" x="0" y="0" width="550" height="200">
+                <component kind="table">
+                    <datasetRun uuid="51fbe331-0ab6-4fad-a626-5be1d8cc171d" subDataset="clientes_dataset">
+                        <connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+                    </datasetRun>
+                    <column kind="single" uuid="15294982-dbe6-40e9-8d91-8fe0e7a27e17" width="50">
+                        <columnHeader height="30" style="Table_CH">
+                            <element kind="staticText" uuid="0a1181ba-a748-47c6-aba8-f293d398e999" x="0" y="0" width="50" height="30" hTextAlign="Center">
+                                <text><![CDATA[id]]></text>
+                            </element>
+                        </columnHeader>
+                        <detailCell height="30" style="Table_TD">
+                            <element kind="textField" uuid="8a50cd14-cbe8-4c36-89ef-0faca537683c" x="0" y="0" width="50" height="30" hTextAlign="Center" vTextAlign="Middle">
+                                <expression><![CDATA[$F{id}]]></expression>
+                            </element>
+                        </detailCell>
+                    </column>
+                    <column kind="single" uuid="9ff2dd59-cff9-4361-a7ee-3c7993cdfb70" width="130">
+                        <columnHeader height="30" style="Table_CH">
+                            <element kind="staticText" uuid="58668883-1ebe-4c93-a9a9-080c7f7a5d4d" x="0" y="0" width="130" height="30" hTextAlign="Center">
+                                <text><![CDATA[email]]></text>
+                            </element>
+                        </columnHeader>
+                        <detailCell height="30" style="Table_TD">
+                            <element kind="textField" uuid="ce9471a9-3a55-48af-bed4-abb14f2d8c30" x="0" y="0" width="130" height="30" hTextAlign="Center" vTextAlign="Middle">
+                                <expression><![CDATA[$F{email}]]></expression>
+                            </element>
+                        </detailCell>
+                    </column>
+                    <column kind="single" uuid="cc5264c4-ecd1-4d40-9668-4e763533be33" width="120">
+                        <columnHeader height="30" style="Table_CH">
+                            <element kind="staticText" uuid="c4d271ed-5459-4acf-8e6c-7848516040a0" x="0" y="0" width="120" height="30" hTextAlign="Center">
+                                <text><![CDATA[name]]></text>
+                            </element>
+                        </columnHeader>
+                        <detailCell height="30" style="Table_TD">
+                            <element kind="textField" uuid="f70acb77-43c4-4551-8a13-1a04397e6e0d" x="0" y="0" width="120" height="30" hTextAlign="Center" vTextAlign="Middle">
+                                <expression><![CDATA[$F{first_name}]]></expression>
+                            </element>
+                        </detailCell>
+                    </column>
+                    <column kind="single" uuid="d17a3ace-ca63-4733-b402-6ee780b7cfdf" width="130">
+                        <columnHeader height="30" style="Table_CH">
+                            <element kind="staticText" uuid="ce035c36-1a98-4e27-93ef-2de7c338e098" x="0" y="0" width="130" height="30" hTextAlign="Center">
+                                <text><![CDATA[last name]]></text>
+                            </element>
+                        </columnHeader>
+                        <detailCell height="30" style="Table_TD">
+                            <element kind="textField" uuid="e5ed2a3f-54db-487d-b5ac-92c0cc2a71c2" x="0" y="0" width="130" height="30" hTextAlign="Center" vTextAlign="Middle">
+                                <expression><![CDATA[$F{last_name}]]></expression>
+                            </element>
+                        </detailCell>
+                    </column>
+                    <column kind="single" uuid="8ffbc402-7f4d-47ee-8270-d125ec24d4ab" width="120">
+                        <columnHeader height="30" style="Table_CH">
+                            <element kind="staticText" uuid="05ffa475-19d8-4690-9cc0-54ea7bacd848" x="0" y="0" width="120" height="30" hTextAlign="Center">
+                                <text><![CDATA[phone]]></text>
+                            </element>
+                        </columnHeader>
+                        <detailCell height="30" style="Table_TD">
+                            <element kind="textField" uuid="6a752a6e-0a4b-4caa-b362-ae5add1a41ed" x="0" y="0" width="120" height="30" hTextAlign="Center" vTextAlign="Middle">
+                                <expression><![CDATA[$F{phone}]]></expression>
+                            </element>
+                        </detailCell>
+                    </column>
+                </component>
+                <property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+                <property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+                <property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+                <property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+            </element>
+        </band>
+    </detail>
+    <columnFooter height="45" splitType="Stretch"/>
+    <pageFooter height="54" splitType="Stretch"/>
+    <summary height="42" splitType="Stretch"/>
+</jasperReport>

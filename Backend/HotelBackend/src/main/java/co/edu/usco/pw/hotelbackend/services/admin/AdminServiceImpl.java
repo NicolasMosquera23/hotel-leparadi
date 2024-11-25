@@ -2,14 +2,15 @@ package co.edu.usco.pw.hotelbackend.services.admin;
 
 import co.edu.usco.pw.hotelbackend.dto.ReservationDTO;
 import co.edu.usco.pw.hotelbackend.dto.RoomDTO;
+import co.edu.usco.pw.hotelbackend.dto.UserDTO;
 import co.edu.usco.pw.hotelbackend.entity.RoomEntity;
 import co.edu.usco.pw.hotelbackend.entity.ReservationEntity;
 import co.edu.usco.pw.hotelbackend.entity.UserEntity;
 import co.edu.usco.pw.hotelbackend.enums.ReservationStatus;
+import co.edu.usco.pw.hotelbackend.enums.UserRole;
 import co.edu.usco.pw.hotelbackend.repository.RoomRepository;
 import co.edu.usco.pw.hotelbackend.repository.ReservationRepository;
 import co.edu.usco.pw.hotelbackend.repository.UserRepository;
-import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,7 +33,6 @@ public class AdminServiceImpl implements AdminService {
     private ReservationRepository reservationRepository;
 
     @Override
-    @Operation(summary = "Publish a room", description = "Publishes a room for a specific user")
     public boolean publishRoom(Long userId, RoomDTO roomDTO) throws IOException {
 
         Optional<UserEntity> optionalUser = userRepository.findById(userId);
@@ -50,7 +50,15 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Operation(summary = "Get all rooms for a user", description = "Fetches all rooms for a specific user")
+    public boolean deleteClientById(Long clientId) {
+        if (userRepository.existsById(clientId)) {
+            userRepository.deleteById(clientId);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public List<RoomDTO> getAllRooms(Long userId) {
         return roomRepository.findAllByUserId(userId).stream()
                 .map(RoomEntity::getRoomDto)
@@ -58,7 +66,6 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Operation(summary = "Get a room by its ID", description = "Fetches a room by its ID")
     public RoomDTO getRoomById(Long roomId) {
         Optional<RoomEntity> optionalRoom = roomRepository.findById(roomId);
         if (optionalRoom.isPresent()) {
@@ -68,7 +75,6 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Operation(summary = "Update room details", description = "Updates the details of a specific room")
     public boolean updateRoom(Long roomId, RoomDTO roomDTO) throws IOException {
         Optional<RoomEntity> optionalRoom = roomRepository.findById(roomId);
         if (optionalRoom.isPresent()) {
@@ -86,7 +92,6 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Operation(summary = "Delete a room", description = "Deletes a room by its ID")
     public boolean deleteRoom(Long roomId) {
         Optional<RoomEntity> optionalRoom = roomRepository.findById(roomId);
         if (optionalRoom.isPresent()) {
@@ -97,7 +102,15 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Operation(summary = "Get all reservations for a room", description = "Fetches all reservations made by a specific admin")
+    public boolean deleteReservation(Long reservationId) {
+        if (reservationRepository.existsById(reservationId)) {
+            reservationRepository.deleteById(reservationId);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public List<ReservationDTO> getAllRoomBookings(Long adminId) {
         return reservationRepository.findAllByAdminId(adminId)
                 .stream().map(ReservationEntity::getReservationDto)
@@ -105,7 +118,6 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    @Operation(summary = "Change booking status", description = "Changes the status of a reservation (Approve or Reject)")
     public boolean changeBookingStatus(Long bookingId, String status) {
         Optional<ReservationEntity> optionalReservation = reservationRepository.findById(bookingId);
         if (optionalReservation.isPresent()) {
@@ -120,4 +132,10 @@ public class AdminServiceImpl implements AdminService {
         }
         return false;
     }
+
+    @Override
+    public List<UserDTO> getAllClients() {
+        List<UserEntity> users = userRepository.findByRole(UserRole.CLIENT);
+        return users.stream().map(UserDTO::new).collect(Collectors.toList());
+        }
 }

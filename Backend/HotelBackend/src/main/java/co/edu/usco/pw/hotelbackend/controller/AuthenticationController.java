@@ -1,8 +1,9 @@
 package co.edu.usco.pw.hotelbackend.controller;
 
+import org.springframework.security.authentication.AuthenticationManager;
 import co.edu.usco.pw.hotelbackend.dto.AuthenticationRequest;
 import co.edu.usco.pw.hotelbackend.dto.SignupRequestDTO;
-import co.edu.usco.pw.hotelbackend.dto.UserDto;
+import co.edu.usco.pw.hotelbackend.dto.UserDTO;
 import co.edu.usco.pw.hotelbackend.entity.UserEntity;
 import co.edu.usco.pw.hotelbackend.repository.UserRepository;
 import co.edu.usco.pw.hotelbackend.services.authentication.AuthService;
@@ -29,9 +30,8 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 @RestController
-@RequestMapping("/api/auth") // Asegura una ruta base para la autenticación
+@RequestMapping("/api/auth")
 public class AuthenticationController {
 
     @Autowired
@@ -52,40 +52,40 @@ public class AuthenticationController {
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
 
-    @Operation(summary = "Client sign-up", description = "Register a new client.")
+    @Operation(summary = "Registro de cliente", description = "Registra un nuevo cliente.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Client successfully registered"),
-            @ApiResponse(responseCode = "400", description = "Email already exists")
+            @ApiResponse(responseCode = "201", description = "Cliente registrado exitosamente"),
+            @ApiResponse(responseCode = "400", description = "El correo electrónico ya existe")
     })
     @PostMapping("/sign-up/client")
     public ResponseEntity<?> signupClient(@RequestBody SignupRequestDTO signupRequestDTO) {
         if (authService.presentByEmail(signupRequestDTO.getEmail())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Client already exists with this email");
+                    .body("Ya existe un cliente con este correo electrónico");
         }
-        UserDto createdUser = authService.signupClient(signupRequestDTO);
+        UserDTO createdUser = authService.signupClient(signupRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
-    @Operation(summary = "Admin sign-up", description = "Register a new admin.")
+    @Operation(summary = "Registro de administrador", description = "Registra un nuevo administrador.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Admin successfully registered"),
-            @ApiResponse(responseCode = "400", description = "Email already exists")
+            @ApiResponse(responseCode = "201", description = "Administrador registrado exitosamente"),
+            @ApiResponse(responseCode = "400", description = "El correo electrónico ya existe")
     })
     @PostMapping("/sign-up/admin")
     public ResponseEntity<?> signupAdmin(@RequestBody SignupRequestDTO signupRequestDTO) {
         if (authService.presentByEmail(signupRequestDTO.getEmail())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body("Admin already exists with this email");
+                    .body("Ya existe un administrador con este correo electrónico");
         }
-        UserDto createdUser = authService.signupAdmin(signupRequestDTO);
+        UserDTO createdUser = authService.signupAdmin(signupRequestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
-    @Operation(summary = "Authenticate user", description = "Authenticate a user and generate a JWT token.")
+    @Operation(summary = "Autenticar usuario", description = "Autentica un usuario y genera un token JWT.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Authentication successful"),
-            @ApiResponse(responseCode = "401", description = "Invalid username or password")
+            @ApiResponse(responseCode = "200", description = "Autenticación exitosa"),
+            @ApiResponse(responseCode = "401", description = "Nombre de usuario o contraseña inválidos")
     })
     @PostMapping("/authenticate")
     public void createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest,
@@ -95,7 +95,7 @@ public class AuthenticationController {
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException e) {
-            throw new BadCredentialsException("Invalid username or password", e);
+            throw new BadCredentialsException("Nombre de usuario o contraseña inválidos", e);
         }
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
@@ -117,7 +117,6 @@ public class AuthenticationController {
                 " X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept, X-Custom-Header");
 
         response.addHeader(HEADER_STRING, TOKEN_PREFIX + jwt);
-
-
     }
 }
+
