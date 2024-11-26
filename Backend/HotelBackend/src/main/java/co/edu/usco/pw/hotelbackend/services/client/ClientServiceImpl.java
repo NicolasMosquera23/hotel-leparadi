@@ -63,18 +63,6 @@ public class ClientServiceImpl implements ClientService {
         return false;
     }
 
-    @Override
-    public boolean updateBooking(Long bookingId, ReservationDTO reservationDTO) {
-        Optional<ReservationEntity> reservationOptional = reservationRepository.findById(bookingId);
-        if (reservationOptional.isPresent()) {
-            ReservationEntity reservation = reservationOptional.get();
-            reservation.setBookDate(reservationDTO.getBookDate());
-            reservation.setBookDateEnd(reservationDTO.getBookDateEnd());
-            reservationRepository.save(reservation);
-            return true;
-        }
-        return false;
-    }
 
     @Override
     public RoomDetailsForClientDTO getRoomDetailsByRoomId(Long roomId) {

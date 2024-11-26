@@ -61,21 +61,6 @@ public class ClientController {
         }
     }
 
-    @Operation(summary = "Actualizar una reserva", description = "Actualiza los detalles de una reserva existente.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Reserva actualizada exitosamente"),
-            @ApiResponse(responseCode = "400", description = "Datos de reserva inválidos"),
-            @ApiResponse(responseCode = "404", description = "Reserva no encontrada") })
-    @PutMapping("/update-booking/{bookingId}")
-    public ResponseEntity<?> updateBooking(@PathVariable Long bookingId, @RequestBody ReservationDTO reservationDTO) {
-        boolean success = clientService.updateBooking(bookingId, reservationDTO);
-        if (success) {
-            return ResponseEntity.status(HttpStatus.OK).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Reserva no encontrada o datos inválidos");
-        }
-    }
-
     @Operation(summary = "Obtener detalles de habitación", description = "Obtiene información detallada sobre una habitación por su ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Detalles de la habitación recuperados exitosamente"),

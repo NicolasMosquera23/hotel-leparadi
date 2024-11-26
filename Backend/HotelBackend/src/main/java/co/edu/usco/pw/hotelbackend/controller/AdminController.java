@@ -58,16 +58,16 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/rooms/{userId}")
-    @Operation(summary = "Obtener todas las habitaciones por ID de usuario", description = "Recupera todas las habitaciones asociadas a un usuario específico (administrador).")
+    @GetMapping("/rooms")
+    @Operation(summary = "Obtener todas las habitaciones", description = "Recupera todas las habitaciones sin importar el ID del usuario.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Habitaciones recuperadas con éxito")
     })
-    public ResponseEntity<List<RoomDTO>> getAllRoomsByUserId(
-            @Parameter(description = "ID del usuario administrador", example = "1") @PathVariable Long userId) {
-        List<RoomDTO> rooms = adminService.getAllRooms(userId);
+    public ResponseEntity<List<RoomDTO>> getAllRooms() {
+        List<RoomDTO> rooms = adminService.getAllRooms();
         return ResponseEntity.ok(rooms);
     }
+
 
     @GetMapping("/room/{roomId}")
     @Operation(summary = "Obtener habitación por ID", description = "Recupera una habitación específica por su ID.")
@@ -140,16 +140,16 @@ public class AdminController {
         return success ? ResponseEntity.ok().build() : ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
-    @GetMapping("/bookings/{adminId}")
-    @Operation(summary = "Obtener todas las reservas de un administrador", description = "Recupera todas las reservas de habitaciones gestionadas por un administrador específico.")
+    @GetMapping("/bookings")
+    @Operation(summary = "Obtener todas las reservas", description = "Recupera todas las reservas sin importar el ID del administrador.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Reservas recuperadas con éxito")
     })
-    public ResponseEntity<List<ReservationDTO>> getAllRoomBookings(
-            @Parameter(description = "ID del administrador para recuperar reservas", example = "1") @PathVariable Long adminId) {
-        List<ReservationDTO> bookings = adminService.getAllRoomBookings(adminId);
+    public ResponseEntity<List<ReservationDTO>> getAllRoomBookings() {
+        List<ReservationDTO> bookings = adminService.getAllRoomBookings();
         return ResponseEntity.ok(bookings);
     }
+
 
     @GetMapping("/booking/{bookingId}/{status}")
     @Operation(summary = "Cambiar el estado de una reserva", description = "Cambia el estado de una reserva específica.")

@@ -14,8 +14,6 @@ public interface ClientService {
 
     boolean bookService(ReservationDTO reservationDTO);
 
-    boolean updateBooking(Long bookingId, ReservationDTO reservationDTO);
-
     RoomDetailsForClientDTO getRoomDetailsByRoomId(Long roomId);
 
     List<ReservationDTO> getAllBookingsByUserId(Long userId);

@@ -59,8 +59,9 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<RoomDTO> getAllRooms(Long userId) {
-        return roomRepository.findAllByUserId(userId).stream()
+    public List<RoomDTO> getAllRooms() {
+        return roomRepository.findAll()
+                .stream()
                 .map(RoomEntity::getRoomDto)
                 .collect(Collectors.toList());
     }
@@ -111,9 +112,10 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public List<ReservationDTO> getAllRoomBookings(Long adminId) {
-        return reservationRepository.findAllByAdminId(adminId)
-                .stream().map(ReservationEntity::getReservationDto)
+    public List<ReservationDTO> getAllRoomBookings() {
+        return reservationRepository.findAll()
+                .stream()
+                .map(ReservationEntity::getReservationDto)
                 .collect(Collectors.toList());
     }
 

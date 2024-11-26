@@ -11,7 +11,7 @@ public interface AdminService {
 
     boolean publishRoom(Long userId, RoomDTO roomDTO) throws IOException;
 
-    List<RoomDTO> getAllRooms(Long userId);
+    List<RoomDTO> getAllRooms();
 
     RoomDTO getRoomById(Long roomId);
 
@@ -23,7 +23,7 @@ public interface AdminService {
 
     boolean deleteClientById(Long clientId);
 
-    List<ReservationDTO> getAllRoomBookings(Long adminId);
+    List<ReservationDTO> getAllRoomBookings();
 
     boolean changeBookingStatus(Long bookingId, String status);
 
